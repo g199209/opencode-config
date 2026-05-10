@@ -332,48 +332,93 @@ git add <file1> <file2> ...
 
 # Verify staging
 git diff --staged --stat
+```
 
-# Commit with informative message
-git commit -m "<message>"
+Commit with subject + body for non-trivial changes, or subject-only for trivial changes. Use multiple `-m` flags to create separate paragraphs in the body.
 
-# Verify
-git log -1 --oneline
+**Single body paragraph (common case):**
+```bash
+git commit -m "<subject>" -m "<body paragraph explaining why/what/effect>"
+```
+
+**Multiple body paragraphs (when more detail is needed):**
+```bash
+git commit -m "<subject>" \
+  -m "<first paragraph: why this change was made>" \
+  -m "<second paragraph: behavioral impact and risks>"
+```
+
+**Trivial change (subject-only):**
+```bash
+git commit -m "<subject>"
+```
+
+After committing, inspect the full message:
+```bash
+git log -1 --format=%B
 ```
 
 ### 5.4 Commit Message Generation
 
-**Follow existing repository style loosely. Prefer informative messages that explain why the change was made and what effect it has, not just which files changed.**
+**Non-trivial commits SHOULD include a body. Subject-only commits are acceptable ONLY for genuinely trivial changes: typo fixes, formatting-only edits, obvious one-line config toggles, or similarly self-explanatory single-line changes.**
+
+The body must answer three questions:
+1. **Why** was this change made (motivation, problem being solved)
+2. **What** effect does it have (behavioral impact, risk surface)
+3. **Any constraints or follow-ups** the next reader should know
+
+Do not simply list changed files. Follow the existing repository style for the subject line prefix (semantic, plain, etc.), but be more informative than minimal historical commits when helpful.
 
 ```
-MESSAGE STRUCTURE (adapt to repo style):
-- Subject line: concise summary of what changed
-- Body (when helpful): why the change was made, what effect it has
-- Reference relevant issues/tickets if applicable
+MESSAGE STRUCTURE:
+Subject: <concise summary, matches repo convention>
+
+Body (required for non-trivial changes):
+<why this change was necessary>
+<what behavioral effect it has>
+<relevant risks, constraints, or follow-up work>
 ```
 
 **Examples:**
+
+Subject-only (trivial only):
 ```
-Semantic style repo:
-  feat: add Shopify discount deletion
-  feat(auth): implement JWT-based session refresh
+fix: correct typo in README
+docs: fix broken link in CONTRIBUTING
+style: reformat config.yaml indentation
+```
 
-Plain style repo:
-  Add Shopify discount deletion
-  Update authentication to refresh sessions via JWT
+Subject + body (default for substantive changes):
+```
+feat: add Shopify discount deletion
 
-Detailed (when complexity warrants):
-  Refactor pricing calculation to support tiered discounts
-  
-  The previous implementation hardcoded single-rate discounts,
-  which broke when Shopify introduced tiered pricing. This
-  change extracts the rate calculation into a configurable
-  strategy pattern.
+Shopify's Admin API requires explicit discount deletion
+to prevent stale pricing rules from persisting after
+a promotion ends. This adds the delete_discount method
+and integrates it into the cleanup cron job.
+
+Risk: Deleting active discounts mid-campaign will break
+checkout. Ensure campaign_end_date is checked before
+deletion in production.
+```
+
+```
+refactor: extract rate calculation into strategy pattern
+
+The previous implementation hardcoded single-rate discounts,
+which broke when Shopify introduced tiered pricing. This
+change extracts the rate calculation into a configurable
+strategy pattern so merchants can mix percentage and
+fixed-amount tiers.
+
+No behavioral change expected; existing tests pass.
 ```
 
 **VALIDATION before each commit:**
-1. Does the working directory have only intended changes?
-2. Are test files staged with their implementation?
-3. Does the message convey why and what, not just which files?
+1. Is the change trivial enough to justify subject-only? If not, does the body explain why/what/effect?
+2. Does the working directory have only intended changes?
+3. Are test files staged with their implementation?
+4. Does the subject match the repo's style convention (semantic/plain/etc.)?
 </execution>
 
 ---
@@ -387,8 +432,15 @@ Detailed (when complexity warrants):
 # Check working directory clean
 git status
 
-# Review new history
-git log --oneline $(git merge-base HEAD main 2>/dev/null || git merge-base HEAD master)..HEAD
+# Review new history with full messages
+git log --format="%H %s%n%B" $(git merge-base HEAD main 2>/dev/null || git merge-base HEAD master)..HEAD
+
+# Validate: verify non-trivial commits have bodies
+FULL_MSG=$(git log -1 --format=%B)
+LINE_COUNT=$(echo "$FULL_MSG" | wc -l)
+if [ "$LINE_COUNT" -le 1 ]; then
+  echo "NOTE: Last commit is subject-only. Confirm it is trivial (typo/formatting/config toggle)."
+fi
 ```
 
 ### 6.2 Force Push Decision
@@ -555,7 +607,8 @@ GIT_SEQUENCE_EDITOR=: git rebase -i --autosquash $MERGE_BASE
 # LAST RESORT ONLY (requires explicit user approval):
 # For SQUASH ALL into one commit using reset --soft:
 # git reset --soft $MERGE_BASE
-# git commit -m "Combined: <summarize all changes>"
+# git commit -m "Combined: <high-level summary of all squashed changes>" \
+#   -m "<body explaining what was squashed, why consolidation was needed, and any risks from combining previously-separate commits>"
 # WARNING: This destroys individual commit messages and should only be used when explicitly requested
 ```
 
