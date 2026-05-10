@@ -1,0 +1,29 @@
+{
+  "skill_name": "lightsail-traffic-query",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Help me check my Tokyo Lightsail instance traffic usage this month. I do not remember the instance name, so find it with awscli.",
+      "expected_output": "The assistant should map Tokyo to ap-northeast-1, list Lightsail instances if no instance is specified, select automatically if exactly one instance exists, query NetworkIn and NetworkOut month-to-date, query the monthly transfer allowance, and report total used plus remaining transfer.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "How much outbound traffic has my Lightsail instance Datahub in Tokyo used this month?",
+      "expected_output": "The assistant should query NetworkOut only for Datahub in ap-northeast-1 with period 86400, unit Bytes, statistics Sum, convert bytes to GiB, and report a concise outbound-only result.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "How much Lightsail traffic do I have left this month in Tokyo?",
+      "expected_output": "The assistant should resolve the Tokyo region, identify the instance if missing, query gbPerMonthAllocated, query month-to-date NetworkIn and NetworkOut, compute total used and remaining transfer, and mention that metric data is approximate versus billing.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Show me the outbound traffic for my Tokyo Lightsail instance for each month this year.",
+      "expected_output": "The assistant should query NetworkOut for each month-to-date range in the current year, using period 86400 and month boundary timestamps, preferably in parallel for independent months, then report a month-by-month table in GiB.",
+      "files": []
+    }
+  ]
+}
