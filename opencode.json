@@ -4,6 +4,11 @@
     "oh-my-openagent@latest",
     "opencode-skill-creator"
   ],
+  "permission": {
+    "bash": {
+      "sudo*": "ask"
+    }
+  },
   "provider": {
     "newapi": {
       "name": "NewAPI",
