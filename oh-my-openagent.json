@@ -1,0 +1,87 @@
+{
+  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json",
+  "agents": {
+    "sisyphus": {
+      "model": "newapi/gpt-5.5",
+      "variant": "high"
+    },
+    "hephaestus": {
+      "model": "newapi/gpt-5.5",
+      "variant": "high"
+    },
+    "oracle": {
+      "model": "newapi/gpt-5.5",
+      "variant": "xhigh"
+    },
+    "librarian": {
+      "model": "newapi/deepseek-v4-flash",
+      "variant": "none"
+    },
+    "explore": {
+      "model": "newapi/deepseek-v4-flash",
+      "variant": "none"
+    },
+    "multimodal-looker": {
+      "model": "newapi/gpt-5.5",
+      "variant": "medium"
+    },
+    "prometheus": {
+      "model": "newapi/claude-opus-4-7",
+      "variant": "xhigh"
+    },
+    "metis": {
+      "model": "newapi/deepseek-v4-pro",
+      "variant": "max"
+    },
+    "momus": {
+      "model": "newapi/gpt-5.5",
+      "variant": "xhigh"
+    },
+    "atlas": {
+      "model": "newapi/gpt-5.5",
+      "variant": "medium"
+    },
+    "sisyphus-junior": {
+      "model": "newapi/gpt-5.5",
+      "variant": "medium"
+    }
+  },
+  "categories": {
+    "visual-engineering": {
+      "model": "newapi/qwen3.6-plus",
+      "variant": "high"
+    },
+    "ultrabrain": {
+      "model": "newapi/gpt-5.5",
+      "variant": "xhigh"
+    },
+    "deep": {
+      "model": "newapi/kimi-k2.6",
+      "variant": "high"
+    },
+    "quick": {
+      "model": "newapi/deepseek-v4-flash",
+      "variant": "high"
+    },
+    "unspecified-low": {
+      "model": "newapi/deepseek-v4-flash",
+      "variant": "high"
+    },
+    "unspecified-high": {
+      "model": "newapi/kimi-k2.6",
+      "variant": "high"
+    },
+    "writing": {
+      "model": "newapi/qwen3.6-plus",
+      "variant": "none"
+    },
+    "artistry": {
+      "model": "newapi/kimi-k2.6",
+      "variant": "high"
+    }
+  },
+  "team_mode": {
+    "enabled": true,
+    "tmux_visualization": true
+  }
+}
