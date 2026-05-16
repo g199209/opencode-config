@@ -1,0 +1,65 @@
+{
+  "$schema": "https://raw.githubusercontent.com/alvinunreal/oh-my-opencode-slim/master/oh-my-opencode-slim.schema.json",
+  "preset": "newapi-slim",
+  "setDefaultAgent": false,
+  "scoringEngineVersion": "v2",
+  "balanceProviderUsage": true,
+  "autoUpdate": true,
+  "presets": {
+    "newapi-slim": {
+      "orchestrator": {
+        "model": "newapi/gpt-5.5",
+        "variant": "high",
+        "skills": [
+          "*"
+        ],
+        "mcps": [
+          "websearch"
+        ]
+      },
+      "oracle": {
+        "model": "newapi/gpt-5.5",
+        "variant": "xhigh",
+        "skills": [],
+        "mcps": []
+      },
+      "designer": {
+        "model": "newapi/qwen3.6-plus",
+        "variant": "high",
+        "skills": [],
+        "mcps": []
+      },
+      "explorer": {
+        "model": "newapi/deepseek-v4-flash",
+        "variant": "none",
+        "skills": [],
+        "mcps": []
+      },
+      "librarian": {
+        "model": "newapi/deepseek-v4-flash",
+        "variant": "none",
+        "skills": [],
+        "mcps": [
+          "websearch",
+          "context7",
+          "grep_app"
+        ]
+      },
+      "fixer": {
+        "model": "newapi/deepseek-v4-flash",
+        "variant": "high",
+        "skills": [],
+        "mcps": []
+      }
+    }
+  },
+  "disabled_agents": [
+    "observer"
+  ],
+  "disabled_mcps": [],
+  "multiplexer": {
+    "type": "tmux",
+    "layout": "main-vertical",
+    "main_pane_size": 60
+  }
+}

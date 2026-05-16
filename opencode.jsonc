@@ -1,8 +1,8 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "plugin": [
-    "oh-my-openagent@latest",
-    "opencode-skill-creator"
+    "oh-my-openagent@4.1.2",
+    "oh-my-opencode-slim@1.1.1"
   ],
   "small_model": "newapi/deepseek-v4-flash",
   "permission": {
@@ -523,7 +523,7 @@
             "cache_read": 0.06
           },
           "provider": {
-            "npm": "@ai-sdk/openai-compatible",
+            "npm": "@ai-sdk/anthropic",
             "api": "http://10.42.1.26:3000/v1"
           }
         },
@@ -569,7 +569,7 @@
             }
           },
           "provider": {
-            "npm": "@ai-sdk/openai-compatible",
+            "npm": "@ai-sdk/alibaba",
             "api": "http://10.42.1.26:3000/v1"
           }
         }
