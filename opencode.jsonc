@@ -4,6 +4,7 @@
     "oh-my-openagent@4.1.2",
     "oh-my-opencode-slim@1.1.1"
   ],
+  "model": "newapi/gpt-5.5",
   "small_model": "newapi/deepseek-v4-flash",
   "permission": {
     "bash": {
@@ -30,6 +31,9 @@
               "output": 45,
               "cache_read": 1
             }
+          },
+          "options": {
+            "reasoningEffort": "high"
           },
           "variants": {
             "none": {
