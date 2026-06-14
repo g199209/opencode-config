@@ -8,7 +8,7 @@
   "presets": {
     "newapi-slim": {
       "orchestrator": {
-        "model": "newapi/gpt-5.5",
+        "model": "newapi/kimi-k2.7-code",
         "variant": "high",
         "skills": [
           "*"
@@ -24,7 +24,7 @@
         "mcps": []
       },
       "designer": {
-        "model": "newapi/qwen3.6-plus",
+        "model": "newapi/gpt-5.5",
         "variant": "high",
         "skills": [],
         "mcps": []
