@@ -15,11 +15,11 @@
     },
     "librarian": {
       "model": "newapi/deepseek-v4-flash",
-      "variant": "none"
+      "variant": "high"
     },
     "explore": {
       "model": "newapi/deepseek-v4-flash",
-      "variant": "none"
+      "variant": "high"
     },
     "multimodal-looker": {
       "model": "newapi/gpt-5.5",
