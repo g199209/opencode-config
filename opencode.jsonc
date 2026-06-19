@@ -432,6 +432,44 @@
             "api": "http://10.42.1.26:3000/v1"
           }
         },
+        "glm-5.2": {
+          "name": "GLM 5.2",
+          "limit": {
+            "context": 1000000,
+            "input": 1000000,
+            "output": 131072
+          },
+          "cost": {
+            "input": 1.4,
+            "output": 4.4,
+            "cache_read": 0.26,
+            "cache_write": 0
+          },
+          "variants": {
+            "none": {
+              "thinking": {
+                "type": "disabled"
+              },
+              "reasoning_effort": "none"
+            },
+            "high": {
+              "thinking": {
+                "type": "enabled"
+              },
+              "reasoning_effort": "high"
+            },
+            "max": {
+              "thinking": {
+                "type": "enabled"
+              },
+              "reasoning_effort": "max"
+            }
+          },
+          "provider": {
+            "npm": "@ai-sdk/openai-compatible",
+            "api": "http://10.42.1.26:3000/v1"
+          }
+        },
         "grok-4.3": {
           "name": "Grok 4.3",
           "limit": {
